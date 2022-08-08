@@ -4,11 +4,12 @@ import useProducts from "../../hooks/useProducts";
 import { removeFromDb } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const [products, setProducts] = useProducts();
   const [cart, setCart] = useCart(products);
+  const navigate = useNavigate();
   const handleRemoveProduct = (product) => {
     const rest = cart.filter((pd) => pd.id !== product.id);
     setCart(rest);
@@ -27,9 +28,9 @@ const Orders = () => {
       </div>
       <div className="cart-container">
         <Cart cart={cart}>
-          <Link to="/inventory">
-            <button>Proceed checkout</button>
-          </Link>
+          
+            <button onClick={()=>navigate('/shipment')}>Proceed Shipping</button>
+          
         </Cart>
       </div>
     </div>
